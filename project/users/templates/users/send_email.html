@@ -1,0 +1,28 @@
+{% extends "project/templates/base.html" %}
+
+
+{% block content %}
+    {% load staticfiles %}
+    {% load filters %}
+    {% load bootstrap %}
+
+    <div class="panel panel-default">
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+
+        <div class="panel-body">
+            <div>Send email</div>
+            <div class="panel panel-default">
+                <form action="{% url 'user:email_send' %}" method="post">
+                    {% csrf_token %}
+                    {{ form }}
+                    <input type="submit" value="OK">
+                </form>
+            </div>
+
+        </div>
+    </div>
+{% endblock content %}
