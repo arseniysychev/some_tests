@@ -41,6 +41,7 @@ class HTMLEmail(object):
     """
 
     port = 0
+    auth = dict(user=None, password=None)
     charset = 'utf-8'
     format = '{name} <{mail}>'
     template_text = ''
@@ -53,13 +54,13 @@ class HTMLEmail(object):
         for kw, value in kwargs.items():
             setattr(self, kw, value)
 
-    def formatting(self, msg, context):
+    def formatting(self, template, context):
         try:
-            with open(msg) as msg_file:
-                text = msg_file.read()
+            with open(template) as template_file:
+                text = template_file.read()
                 text = text.format(**context)
         except IOError:
-            text = msg.format(**context)
+            text = template.format(**context)
             if not text:
                 return str(context)
         return text
